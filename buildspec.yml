@@ -6,6 +6,10 @@ phases:
       nodejs: 16
       python: 3.8
     commands:
+      - python3 -m venv cdk-env
+      - source .venv/bin/activate
+      - pip install --upgrade pip
+      - pip install aws-cdk-lib constructs
       - pip install aws-cdk-lib
       - pip install -r lambda/requirements.txt -t lambda/
   build:
