@@ -5,11 +5,14 @@ phases:
       nodejs: 16
       python: 3.8
     commands:
-      - echo "Installing dependencies..."
+      - echo "Installing Node.js and npm..."
+      - curl -sL https://deb.nodesource.com/setup_16.x | bash -  # Ensures Node.js 16 is installed
+      - apt-get install -y nodejs  # Installs npm along with Node.js
       - npm install -g aws-cdk # Ensures the CDK CLI is installed globally
+      - echo "Installing Python dependencies..."
       - pip install aws-cdk-lib
       - pip install constructs
-      - echo "Installing Python Lambda dependencies..."
+      - echo "Installing Lambda dependencies..."
       - pip install -r lambda/requirements.txt -t lambda/
   build:
     commands:
@@ -22,4 +25,3 @@ phases:
 artifacts:
   files:
     - '**/*' # Adjust if specific files need to be included in the build artifacts
-
