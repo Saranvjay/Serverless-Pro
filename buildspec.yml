@@ -7,8 +7,8 @@ phases:
       python: 3.8
     commands:
       - echo "Installing Node.js and npm..."
-      - curl -sL https://rpm.nodesource.com/setup_18.x | sudo -E bash -  # Install Node.js 18
-      - sudo yum install -y nodejs  # Install Node.js and npm
+      - curl -sL https://rpm.nodesource.com/setup_18.x | bash -  # Install Node.js 18 (no sudo needed)
+      - yum install -y nodejs  # Install Node.js and npm (this should work without sudo)
       - node -v  # Verify Node.js version
       - npm -v   # Verify npm version
       - echo "Installing AWS CDK globally..."
