@@ -3,23 +3,14 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 16
+      nodejs: 18
       python: 3.8
     commands:
-      - echo "Installing Node.js..."
-      - curl -sL https://nodejs.org/dist/v16.19.0/node-v16.19.0-linux-x64.tar.xz | tar -xJ -C /tmp
-      - export PATH=/tmp/node-v16.19.0-linux-x64/bin:$PATH
-      # Verify Node.js installation
-      - node -v
-      - npm -v
-      # Install AWS CDK
-      - echo "Installing AWS CDK..."
-      - npm install -g aws-cdk
-      - python3 -m venv ~/.venv
-      - source ~/.venv/bin/activate
-      - pip install --upgrade pip
-      - pip install aws-cdk-lib constructs
-      - pip install aws-cdk-lib  
+      - echo Installing dependencies...
+      - npm install -g aws-cdk  # Install AWS CDK globally
+      - npm install  # Install project dependencies
+      - pip install aws-cdk-lib
+      - pip install -r lambda/requirements.txt -t lambda/
   build:
     commands:
       - echo "Synthesizing the AWS CDK stack..."
