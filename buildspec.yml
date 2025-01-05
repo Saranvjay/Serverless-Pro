@@ -3,8 +3,10 @@ phases:
   install:
     runtime-versions:
       python: 3.8
-      nodejs: 18  # You can try using Node.js 18 (or 20) to match the latest CDK support
     commands:
+      - echo "Installing the latest version of Node.js..."
+      - curl -fsSL https://deb.nodesource.com/setup_current.x | bash -  # Install the latest stable version of Node.js
+      - apt-get install -y nodejs  # Install Node.js
       - echo "Installing AWS CDK globally..."
       - npm install -g aws-cdk  # Install AWS CDK globally
       - echo "Installing Python dependencies..."
