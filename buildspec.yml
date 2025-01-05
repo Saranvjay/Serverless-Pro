@@ -2,31 +2,34 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      nodejs: 18 # Specify the Node.js version
     commands:
-      - echo "Installing NVM..."
-      - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash  # Install NVM
-      - source ~/.bashrc  # Ensure NVM is available in the environment
-      - echo "Installing Node.js 18 using NVM..."
-      - nvm install 18  # Install Node.js 18
-      - nvm use 18  # Use Node.js 18
-      - node -v  # Verify Node.js version
-      - npm -v   # Verify npm version
-      - echo "Installing AWS CDK globally..."
-      - npm install -g aws-cdk  # Install AWS CDK globally
+      - echo "Installing AWS CDK..."
+      - npm install -g aws-cdk # Install AWS CDK globally
       - echo "Installing project dependencies..."
-      - npm install  # Install project dependencies from package.json
-      - echo "Installing Python dependencies..."
-      - pip install aws-cdk-lib
-      - pip install -r lambda/requirements.txt -t lambda/
+      - npm install # Install project dependencies from package.json
+
+  pre_build:
+    commands:
+      - echo "Running pre-build phase..."
+      - echo "Validating CDK installation..."
+      - cdk --version # Ensure CDK is installed correctly
 
   build:
     commands:
-      - echo "Synthesizing the AWS CDK stack..."
+      - echo "Running build phase..."
+      - npm run build # Replace with your build command, if applicable
+      - echo "Synthesizing CDK stack..."
       - cdk synth
-      - echo "Deploying the AWS CDK stack..."
-      - cdk deploy --require-approval never
+
+  post_build:
+    commands:
+      - echo "Running post-build phase..."
+      - echo "Deploying CDK stack..."
+      - cdk deploy --require-approval never # Automatically approve changes
 
 artifacts:
   files:
-    - '**/*'
+    - "**/*" # Include all files for debugging or further steps
   discard-paths: yes
