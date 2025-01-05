@@ -2,11 +2,13 @@ version: 0.2
 
 phases:
   install:
-    runtime-versions:
-      nodejs: 18  # Node.js version
-      python: 3.8  # Python version
     commands:
-      - echo "Node.js and npm should be available as runtime versions are defined"
+      - echo "Installing NVM..."
+      - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash  # Install NVM
+      - source ~/.bashrc  # Ensure NVM is available in the environment
+      - echo "Installing Node.js 18 using NVM..."
+      - nvm install 18  # Install Node.js 18
+      - nvm use 18  # Use Node.js 18
       - node -v  # Verify Node.js version
       - npm -v   # Verify npm version
       - echo "Installing AWS CDK globally..."
