@@ -3,7 +3,10 @@ phases:
   install:
     runtime-versions:
       python: 3.8
+      nodejs: 18  # You can try using Node.js 18 (or 20) to match the latest CDK support
     commands:
+      - echo "Installing AWS CDK globally..."
+      - npm install -g aws-cdk  # Install AWS CDK globally
       - echo "Installing Python dependencies..."
       - pip install aws-cdk-lib
       - pip install constructs
@@ -12,11 +15,11 @@ phases:
   build:
     commands:
       - echo "Synthesizing the AWS CDK stack..."
-      - npx cdk synth  # Use the locally installed cdk
+      - cdk synth  # Directly use cdk since it's globally installed
   post_build:
     commands:
       - echo "Deploying the AWS CDK stack..."
-      - npx cdk deploy --require-approval never  # Use the locally installed cdk
+      - cdk deploy --require-approval never  # Directly use cdk for deployment
 artifacts:
   files:
     - '**/*'
