@@ -1,0 +1,16 @@
+---
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 16
+      python: 3.8
+    commands:
+      - pip install aws-cdk-lib
+      - pip install -r lambda/requirements.txt -t lambda/
+  build:
+    commands:
+      - echo "Synthesizing the AWS CDK stack..."
+      - cdk synth
+      - echo "Deploying the AWS CDK stack..."
+      - cdk deploy --require-approval never
