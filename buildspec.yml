@@ -2,16 +2,16 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 18
+      nodejs: 16
       python: 3.8
     commands:
       - echo "Ensuring pip is up to date..."
-      - python -m ensurepip --upgrade
-      - python -m pip install --upgrade pip
+      - python3 -m ensurepip --upgrade
+      - python3 -m pip install --upgrade pip
       - echo "Installing AWS CDK libraries..."
-      - python -m pip install aws-cdk-lib
+      - python3 -m pip install aws-cdk-lib
       - echo "Installing Python dependencies for Lambda functions..."
-      - python -m pip install -r lambda/requirements.txt -t lambda/
+      - python3 -m pip install -r lambda/requirements.txt -t lambda/
   build:
     commands:
       - echo "Synthesizing the AWS CDK stack..."
