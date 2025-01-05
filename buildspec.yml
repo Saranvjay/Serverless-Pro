@@ -4,10 +4,6 @@ phases:
     runtime-versions:
       python: 3.8
     commands:
-      - echo "Installing Node.js and npm..."
-      - yum install -y nodejs  # Install Node.js and npm using yum
-      - echo "Installing AWS CDK..."
-      - npm install -g aws-cdk  # Install CDK globally
       - echo "Installing Python dependencies..."
       - pip install aws-cdk-lib
       - pip install constructs
@@ -16,11 +12,11 @@ phases:
   build:
     commands:
       - echo "Synthesizing the AWS CDK stack..."
-      - cdk synth
+      - npx cdk synth  # Use the locally installed cdk
   post_build:
     commands:
       - echo "Deploying the AWS CDK stack..."
-      - cdk deploy --require-approval never
+      - npx cdk deploy --require-approval never  # Use the locally installed cdk
 artifacts:
   files:
     - '**/*'
