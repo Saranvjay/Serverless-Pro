@@ -5,7 +5,7 @@ phases:
       python: 3.8
     commands:
       - echo "Installing Node.js and npm..."
-      - apt install -y nodejs
+      - yum install -y nodejs  # Install Node.js and npm using yum
       - echo "Installing AWS CDK..."
       - npm install -g aws-cdk  # Install CDK globally
       - echo "Installing Python dependencies..."
