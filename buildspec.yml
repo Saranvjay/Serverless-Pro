@@ -5,6 +5,8 @@ phases:
       python: 3.8
       nodejs: 16  # Ensure Node.js is available
     commands:
+      - curl --silent --location https://rpm.nodesource.com/setup_18.x | sudo bash -
+      - sudo yum install -y nodejs
       - echo "Installing AWS CDK..."
       - npm install -g aws-cdk  # Install AWS CDK globally
       - echo "Installing Python dependencies..."
