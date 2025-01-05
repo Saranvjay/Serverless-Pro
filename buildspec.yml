@@ -2,11 +2,12 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 16  # Using pre-installed Node.js 16.x version (or use 18 or 20 depending on your needs)
       python: 3.8
     commands:
+      - echo "Installing Node.js and npm..."
+      - apt install -y nodejs
       - echo "Installing AWS CDK..."
-      - npm install -g aws-cdk  # Installing CDK globally with npm
+      - npm install -g aws-cdk  # Install CDK globally
       - echo "Installing Python dependencies..."
       - pip install aws-cdk-lib
       - pip install constructs
