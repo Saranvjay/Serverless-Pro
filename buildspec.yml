@@ -1,37 +1,16 @@
+---
 version: 0.2
-
 phases:
   install:
     runtime-versions:
-      nodejs: 18 # Specify the Node.js version
+      nodejs: 16
+      python: 3.8
     commands:
-      - echo "Ensuring Node.js and npm are available..."
-      - node -v # Check Node.js version
-      - npm -v  # Check npm version
-      - echo "Installing AWS CDK globally..."
-      - npm install -g aws-cdk # Install AWS CDK globally
-
-
-  pre_build:
-    commands:
-      - echo "Running pre-build phase..."
-      - echo "Validating CDK installation..."
-      - cdk --version # Ensure CDK is installed correctly
-
+      - pip install aws-cdk-lib
+      - pip install -r lambda/requirements.txt -t lambda/
   build:
     commands:
-      - echo "Running build phase..."
-      - npm run build # Replace with your build command, if applicable
-      - echo "Synthesizing CDK stack..."
+      - echo "Synthesizing the AWS CDK stack..."
       - cdk synth
-
-  post_build:
-    commands:
-      - echo "Running post-build phase..."
-      - echo "Deploying CDK stack..."
-      - cdk deploy --require-approval never # Automatically approve changes
-
-artifacts:
-  files:
-    - "**/*" # Include all files for debugging or further steps
-  discard-paths: yes
+      - echo "Deploying the AWS CDK stack..."
+      - cdk deploy --require-approval never
