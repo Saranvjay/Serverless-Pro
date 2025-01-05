@@ -3,12 +3,10 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 18
-      python: 3.8
+      nodejs: 18  # Node.js version
+      python: 3.8  # Python version
     commands:
-      - echo "Installing Node.js and npm..."
-      - curl -sL https://rpm.nodesource.com/setup_18.x | bash -  # Install Node.js 18 (no sudo needed)
-      - yum install -y nodejs  # Install Node.js and npm (this should work without sudo)
+      - echo "Node.js and npm should be available as runtime versions are defined"
       - node -v  # Verify Node.js version
       - npm -v   # Verify npm version
       - echo "Installing AWS CDK globally..."
