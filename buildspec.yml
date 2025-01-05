@@ -6,9 +6,9 @@ phases:
       python: 3.8
     commands:
       - echo "Installing Node.js and npm..."
-      - curl -sL https://deb.nodesource.com/setup_16.x | bash -  # Ensures Node.js 16 is installed
-      - apt-get install -y nodejs  # Installs npm along with Node.js
-      - npm install -g aws-cdk # Ensures the CDK CLI is installed globally
+      - curl --silent --location https://rpm.nodesource.com/setup_16.x | bash -  # Correct setup for Amazon Linux
+      - yum install -y nodejs  # Install Node.js and npm on Amazon Linux
+      - npm install -g aws-cdk  # Install CDK globally
       - echo "Installing Python dependencies..."
       - pip install aws-cdk-lib
       - pip install constructs
@@ -24,4 +24,4 @@ phases:
       - cdk deploy --require-approval never
 artifacts:
   files:
-    - '**/*' # Adjust if specific files need to be included in the build artifacts
+    - '**/*'
