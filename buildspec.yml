@@ -5,10 +5,12 @@ phases:
     runtime-versions:
       nodejs: 18 # Specify the Node.js version
     commands:
-      - echo "Installing AWS CDK..."
+      - echo "Ensuring Node.js and npm are available..."
+      - node -v # Check Node.js version
+      - npm -v  # Check npm version
+      - echo "Installing AWS CDK globally..."
       - npm install -g aws-cdk # Install AWS CDK globally
-      - echo "Installing project dependencies..."
-      - npm install # Install project dependencies from package.json
+
 
   pre_build:
     commands:
