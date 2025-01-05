@@ -3,15 +3,9 @@ phases:
   install:
     runtime-versions:
       python: 3.8
+      nodejs: 16  # Ensure Node.js is available
     commands:
-      - echo "Installing Node Version Manager (nvm)..."
-      - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash  # Install nvm
-      - export NVM_DIR="/tmp/codebuild/binaries/nvm"  # Set the correct NVM_DIR path
-      - '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"'  # Load nvm
-      - echo "Installing the latest version of Node.js using nvm..."
-      - bash -c "source $NVM_DIR/nvm.sh && nvm install node"  # Run nvm commands in the same shell session
-      - bash -c "source $NVM_DIR/nvm.sh && nvm use node"  # Use the installed version
-      - echo "Installing AWS CDK globally..."
+      - echo "Installing AWS CDK..."
       - npm install -g aws-cdk  # Install AWS CDK globally
       - echo "Installing Python dependencies..."
       - pip install aws-cdk-lib
@@ -21,11 +15,11 @@ phases:
   build:
     commands:
       - echo "Synthesizing the AWS CDK stack..."
-      - cdk synth  # Directly use cdk since it's globally installed
+      - npx cdk synth  # Use npx to run the CDK synth command
   post_build:
     commands:
       - echo "Deploying the AWS CDK stack..."
-      - cdk deploy --require-approval never  # Directly use cdk for deployment
+      - npx cdk deploy --require-approval never  # Use npx to run the CDK deploy command
 artifacts:
   files:
     - '**/*'
